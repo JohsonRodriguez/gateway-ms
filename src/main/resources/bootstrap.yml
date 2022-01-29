@@ -15,4 +15,4 @@ security:
   oauth2:
     resource:
       jwk:
-        key-set-uri: http://auth-service:8080/.well-known/jwks.json
+        key-set-uri: http://auth-ms-service:8080/.well-known/jwks.json
