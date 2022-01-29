@@ -18,8 +18,8 @@ env:
   CLUSTER_NAME: lordbyron-dev
   CLUSTER_RESOURCE_GROUP: lordbyron-dev
   NAMESPACE: default
-  APP_NAME: auth-ms
-  SECRET: auth-ms
+  APP_NAME: gateway-ms
+  SECRET: gateway-ms
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
