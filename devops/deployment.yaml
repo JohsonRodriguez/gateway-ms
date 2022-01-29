@@ -45,6 +45,7 @@ kind: Service
 metadata:
   name: gateway-ms-service
 spec:
+  type: LoadBalancer
   selector:
     app: gateway-ms
   ports:
