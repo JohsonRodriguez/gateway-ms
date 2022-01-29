@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gateway-ms
+  labels:
+    app: gateway-ms
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gateway-ms
+  template:
+    metadata:
+      labels:
+        app: gateway-ms
+    spec:
+      containers:
+        - name: gateway-ms
+          image: gateway-ms:v1
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+              cpu: "300m"
+          ports:
+            - containerPort: 8080
+          env:
+            - name: CONFIG_URI
+              valueFrom:
+                secretKeyRef:
+                  name: lordbyron-secret
+                  key: config-uri
+            - name: CONFIG_ENABLED
+              valueFrom:
+                secretKeyRef:
+                  name: lordbyron-secret
+                  key: config-enabled
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: gateway-service
+spec:
+  selector:
+    app: gateway-ms
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+  type: LoadBalancer
+status:
+  loadBalancer:
+    ingress:
+      - ip: 192.0.2.129
